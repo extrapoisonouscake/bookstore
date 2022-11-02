@@ -1,0 +1,12 @@
+.main {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.count {
+  color: var(--gray);
+  font-weight: bold;
+  font-size: 1.4rem;
+}

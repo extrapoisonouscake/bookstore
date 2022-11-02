@@ -1,0 +1,19 @@
+.main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.heading {
+  font-size: 1.3rem;
+}
+
+.price {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+.counter-bottom {
+  align-items: flex-end;
+}

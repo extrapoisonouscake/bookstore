@@ -1,0 +1,10 @@
+.top {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--padding);
+  align-items: stretch;
+}
+
+.top > div {
+  flex: 0 1 50%;
+}

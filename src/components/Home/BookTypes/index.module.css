@@ -1,0 +1,9 @@
+.main {
+  background-color: #fff;
+  border-radius: var(--border-radius);
+  padding: var(--padding);
+  display: flex;
+  flex-direction: column;
+  min-height: fit-content;
+  height: calc(100vh - 60px - (50px * 2));
+}

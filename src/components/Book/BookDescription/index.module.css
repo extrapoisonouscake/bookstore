@@ -1,0 +1,5 @@
+.main {
+  background-color: #fff;
+  border-radius: var(--border-radius);
+  padding: var(--padding);
+}
