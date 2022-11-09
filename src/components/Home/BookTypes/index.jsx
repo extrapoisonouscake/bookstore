@@ -6,7 +6,7 @@ export default function BookTypes({ onChoose,chosenIndex }) {
     <div className={styles.main}>
       {bookTypes.map((type, i) => (
         <div onClick={()=>{onChoose(i)}} key={i}>
-          <p className={cn({'text-bold':chosenIndex === i})}>{type}</p>
+          <p style={{cursor:'pointer'}} className={cn({'text-bold':chosenIndex === i})}>{type}</p>
         </div>
       ))}
     </div>

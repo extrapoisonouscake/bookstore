@@ -2,6 +2,7 @@
   width: 40px;
   height: 40px;
   background: #000;
+  cursor: pointer;
   color: #fff;
   border-radius: var(--border-radius);
   padding: 5px;

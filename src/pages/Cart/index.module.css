@@ -1,0 +1,15 @@
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 20px;
+  height: fit-content;
+  gap: 20px;
+}
+
+.books {
+  flex-grow: 1;
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+}

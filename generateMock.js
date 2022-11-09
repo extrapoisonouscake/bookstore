@@ -17,7 +17,7 @@ const CATEGORIES_COUNT = 7;
 const BOOKS_COUNT_IN_CATEGORY = 5;
 const REVIEWS_FOR_EACH_BOOK_COUNT = 3;
 
-function generateCategory(lastBookId = 0) {
+function generateCategory(lastBookId = 0, lastCategory) {
   let lastId = lastBookId;
   const result = [];
   for (let i = 0; i < BOOKS_COUNT_IN_CATEGORY; i++) {
@@ -30,6 +30,7 @@ function generateCategory(lastBookId = 0) {
           string.charAt(0).toUpperCase() + string.substring(1).toLowerCase()
         );
       })(),
+      category: lastCategory + 1,
       price: Math.round(Number(faker.finance.amount(10, 3000))),
       description: faker.random.words(30) + ".",
       genre: genres[_.random(0, genres.length - 1)],
@@ -41,23 +42,23 @@ function generateCategory(lastBookId = 0) {
 function generateBooks() {
   const result = [];
   let lastBookId = 0;
+  let lastCategory = 0;
   for (let i = 0; i < CATEGORIES_COUNT; i++) {
-    const { category, lastId } = generateCategory(lastBookId);
+    const { category, lastId } = generateCategory(lastBookId, lastCategory);
     result.push(category);
     lastBookId = lastId;
+    lastCategory++;
   }
-  return result;
+  return result.reduce((prev, cur) => ([ ...prev, ...cur ]), []);
 }
 
 function generateReviews(booksData) {
-  const booksCategories = _.cloneDeep(booksData);
+  const books = _.cloneDeep(booksData);
   const result = [];
-  for (const books of booksCategories) {
     for (const book of books) {
-      const bookReviews = [];
+      const bookReviews = []
       for (let i = 0; i < REVIEWS_FOR_EACH_BOOK_COUNT; i++) {
         const review = {
-            
           name: faker.name.fullName(),
           rate: Math.floor(Math.random() * (5 - 1) + 1),
           text: faker.random.words(10) + ".",
@@ -66,7 +67,6 @@ function generateReviews(booksData) {
       }
       result.push({ bookId: book.id, reviews: bookReviews });
     }
-  }
   return result;
 }
 

@@ -1,7 +1,7 @@
 ## 🪜 Настройка проекта
 
 ```shell
-git clone https://github.com/extrapoisonouscake/yandex3
+git clone https://github.com/extrapoisonouscake/bookstore
 npm install
 npm run generate-books
 npm start

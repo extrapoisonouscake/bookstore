@@ -2,33 +2,32 @@ import BookReviews from "components/Book/BookReviews";
 import BookDescription from "components/Book/BookDescription";
 import styles from "./index.module.css";
 import BookCard from "components/Common/BookCard";
-import { useMemo } from "react";
-import mock from "constants/mock.json";
+import { useEffect, useMemo } from "react";
 import getBookRating from "helpers/getBookRating";
-export default function Book({ id }) {
-  const { books, reviews } = mock;
-  const book = useMemo(() => {
-    for (const bookArray of books) {
-      for (const book of bookArray) {
-        if (book.id === id) {
-          const bookReviews = reviews.find(
-            (item) => item.bookId === id
-          ).reviews;
-          return { info: book, reviews: bookReviews };
-        }
-      }
-    }
-  }, [id]);
+import { useParams } from "react-router-dom";
+import loadReviews from 'store/reviews/loadReviews'
+import {useSelector,useDispatch} from 'react-redux'
+import {selectReviews} from 'store/reviews/selectors'
+import {selectBooks} from 'store/books/selectors'
+export default function Book() {
+  const dispatch = useDispatch();
+  const reviews = useSelector(selectReviews)
+  const books = useSelector(selectBooks);
+  const {id} = useParams()
+  const book = books.entities[id];
+  useEffect(()=>{
+    dispatch((d,s)=>loadReviews(d,s,id))
+  },[])
   return (
     <>
-      {book ? (
+      {book && Object.keys(reviews.entities).length > 0 ? (
         <>
           <div className={styles.top}>
-            <BookCard {...book.info} rating={getBookRating(book.info.id)} isCounterAlignedBottom />
-            <BookDescription text={book.info.description} />
+            <BookCard {...book} rating={getBookRating(book.id)} isCounterAlignedBottom />
+            <BookDescription text={book.description} />
           </div>
 
-          <BookReviews reviews={book.reviews} />
+          <BookReviews reviews={reviews.entities[Object.keys(reviews.entities).find(i => reviews.entities[i].bookId === Number(id))]?.reviews} />
         </>
       ) : (
         <h1>Такой книги не существует.</h1>

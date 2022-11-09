@@ -6,8 +6,8 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 
 import { IoAdd, IoRemove } from "react-icons/io5";
-export default function Counter({ callback }) {
-  const [count, setCount] = useState(0);
+export default function Counter({ callback,value= 0 }) {
+  const [count, setCount] = useState(value);
   useEffect(() => {
     if (callback) callback(count);
   }, [count]);
